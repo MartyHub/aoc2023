@@ -10,116 +10,19 @@ import (
 	"github.com/MartyHub/aoc2023"
 )
 
-type (
-	Engine struct {
-		area    image.Rectangle
-		numbers []Number
-		symbols map[image.Point]rune
-	}
-
-	Number struct {
-		rect  image.Rectangle
-		value int
-	}
-)
-
-func (num Number) String() string {
-	return fmt.Sprintf("%3d, X=[%3d, %3d[, Y=%3d", num.value, num.rect.Min.X, num.rect.Max.X, num.rect.Min.Y)
-}
-
-func (num Number) neighbors() []image.Point {
-	res := []image.Point{
-		image.Pt(num.rect.Min.X-1, num.rect.Min.Y-1),
-		image.Pt(num.rect.Min.X-1, num.rect.Min.Y),
-		image.Pt(num.rect.Min.X-1, num.rect.Min.Y+1),
-		image.Pt(num.rect.Max.X, num.rect.Max.Y-1),
-		image.Pt(num.rect.Max.X, num.rect.Max.Y),
-		image.Pt(num.rect.Max.X, num.rect.Max.Y+1),
-	}
-
-	for x := num.rect.Min.X; x < num.rect.Max.X; x++ {
-		res = append(res, image.Pt(x, num.rect.Min.Y-1))
-		res = append(res, image.Pt(x, num.rect.Min.Y+1))
-	}
-
-	return res
-}
-
 func main() {
 	part1()
 	part2()
 }
 
 func part1() {
-	aoc2023.Expect("Sample 1", sum1("day03/data/sample.txt"), 4361)
-	aoc2023.Expect("Part 1", sum1("day03/data/input.txt"), 526404)
-}
-
-func sum1(filePath string) int {
-	engine := parse(filePath)
-	res := 0
-
-	for _, num := range engine.numbers {
-		part := false
-
-		for _, nb := range num.neighbors() {
-			if !nb.In(engine.area) {
-				continue
-			}
-
-			if _, found := engine.symbols[nb]; found {
-				part = true
-
-				break
-			}
-		}
-
-		if part {
-			res += num.value
-		}
-	}
-
-	return res
+	aoc2023.Expect("Sample 1", parse("day03/data/sample.txt").sum1(), 4361)
+	aoc2023.Expect("Part 1", parse("day03/data/input.txt").sum1(), 526404)
 }
 
 func part2() {
-	aoc2023.Expect("Sample 2", sum2("day03/data/sample.txt"), 467835)
-	aoc2023.Expect("Part 2", sum2("day03/data/input.txt"), 84399773)
-}
-
-func sum2(filePath string) int {
-	engine := parse(filePath)
-	res := 0
-
-	for pt, r := range engine.symbols {
-		if r != '*' {
-			continue
-		}
-
-		gears := make([]Number, 0, 2)
-
-		for _, num := range engine.numbers {
-			for _, nb := range num.neighbors() {
-				if !nb.In(engine.area) {
-					continue
-				}
-
-				if nb == pt {
-					gears = append(gears, num)
-
-					if len(gears) == 2 {
-						break
-					}
-				}
-			}
-		}
-
-		if len(gears) == 2 {
-			res += gears[0].value * gears[1].value
-		}
-	}
-
-	return res
+	aoc2023.Expect("Sample 2", parse("day03/data/sample.txt").sum2(), 467835)
+	aoc2023.Expect("Part 2", parse("day03/data/input.txt").sum2(), 84399773)
 }
 
 func parse(filePath string) Engine {
@@ -154,6 +57,101 @@ func parse(filePath string) Engine {
 	}
 
 	res.area = image.Rect(0, 0, maxX, maxY)
+
+	return res
+}
+
+type (
+	Engine struct {
+		area    image.Rectangle
+		numbers []Number
+		symbols map[image.Point]rune
+	}
+
+	Number struct {
+		rect  image.Rectangle
+		value int
+	}
+)
+
+func (eng Engine) sum1() int {
+	res := 0
+
+	for _, num := range eng.numbers {
+		part := false
+
+		for _, nb := range num.neighbors() {
+			if !nb.In(eng.area) {
+				continue
+			}
+
+			if _, found := eng.symbols[nb]; found {
+				part = true
+
+				break
+			}
+		}
+
+		if part {
+			res += num.value
+		}
+	}
+
+	return res
+}
+
+func (eng Engine) sum2() int {
+	res := 0
+
+	for pt, r := range eng.symbols {
+		if r != '*' {
+			continue
+		}
+
+		gears := make([]Number, 0, 2)
+
+		for _, num := range eng.numbers {
+			for _, nb := range num.neighbors() {
+				if !nb.In(eng.area) {
+					continue
+				}
+
+				if nb == pt {
+					gears = append(gears, num)
+
+					if len(gears) == 2 {
+						break
+					}
+				}
+			}
+		}
+
+		if len(gears) == 2 {
+			res += gears[0].value * gears[1].value
+		}
+	}
+
+	return res
+}
+
+func (num Number) String() string {
+	return fmt.Sprintf("%3d, X=[%3d, %3d[, Y=%3d", num.value, num.rect.Min.X, num.rect.Max.X, num.rect.Min.Y)
+}
+
+func (num Number) neighbors() []image.Point {
+	res := []image.Point{
+		image.Pt(num.rect.Min.X-1, num.rect.Min.Y-1),
+		image.Pt(num.rect.Min.X-1, num.rect.Min.Y),
+		image.Pt(num.rect.Min.X-1, num.rect.Min.Y+1),
+		image.Pt(num.rect.Max.X, num.rect.Max.Y-1),
+		image.Pt(num.rect.Max.X, num.rect.Max.Y),
+		image.Pt(num.rect.Max.X, num.rect.Max.Y+1),
+	}
+
+	for x := num.rect.Min.X; x < num.rect.Max.X; x++ {
+		res = append(res, image.Pt(x, num.rect.Min.Y-1))
+		res = append(res, image.Pt(x, num.rect.Min.Y+1))
+	}
 
 	return res
 }
