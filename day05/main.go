@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/MartyHub/aoc2023"
@@ -29,7 +27,6 @@ func parse(filePath string) *Almanac {
 	var ranges Ranges
 
 	res := &Almanac{Maps: make([]Ranges, 0, 7)}
-	re := regexp.MustCompile(`(\d+)`)
 
 	for _, line := range aoc2023.MustReadLines(filePath) {
 		if line == "" {
@@ -37,7 +34,7 @@ func parse(filePath string) *Almanac {
 		}
 
 		if strings.HasPrefix(line, "seeds: ") {
-			res.Seeds = toInts(re.FindAllString(line[7:], -1))
+			res.Seeds = aoc2023.ToInts(line[7:])
 
 			continue
 		}
@@ -52,8 +49,7 @@ func parse(filePath string) *Almanac {
 			continue
 		}
 
-		if matches := re.FindAllString(line, -1); matches != nil {
-			ints := toInts(matches)
+		if ints := aoc2023.ToInts(line); ints != nil {
 			ranges = append(ranges, Range{
 				Src: ints[1],
 				Dst: ints[0],
@@ -216,14 +212,4 @@ func (itvs Intervals) Split(pt int, start bool) Intervals {
 	}
 
 	return itvs
-}
-
-func toInts(a []string) []int {
-	res := make([]int, len(a))
-
-	for i, s := range a {
-		res[i] = aoc2023.Must(strconv.Atoi(s))
-	}
-
-	return res
 }

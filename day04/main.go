@@ -2,7 +2,6 @@ package main
 
 import (
 	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/MartyHub/aoc2023"
@@ -45,7 +44,7 @@ func parseNums(s string) map[int]struct{} {
 	res := make(map[int]struct{})
 
 	for _, match := range re.FindAllString(s, -1) {
-		res[aoc2023.Must(strconv.Atoi(match))] = struct{}{}
+		res[aoc2023.ToInt(match)] = struct{}{}
 	}
 
 	return res

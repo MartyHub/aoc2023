@@ -2,7 +2,6 @@ package main
 
 import (
 	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/MartyHub/aoc2023"
@@ -54,7 +53,7 @@ func parseSet(s string) Set {
 	re := regexp.MustCompile(`(\d+) (red|blue|green)`)
 
 	for _, match := range re.FindAllStringSubmatch(s, -1) {
-		count := aoc2023.Must(strconv.Atoi(match[1]))
+		count := aoc2023.ToInt(match[1])
 
 		switch match[2] {
 		case "red":

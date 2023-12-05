@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image"
 	"regexp"
-	"strconv"
 	"unicode"
 
 	"github.com/MartyHub/aoc2023"
@@ -43,7 +42,7 @@ func parse(filePath string) Engine {
 		for j, value := range re.FindAllString(line, -1) {
 			res.numbers = append(res.numbers, Number{
 				rect:  image.Rect(indexes[j][0], i, indexes[j][1], i),
-				value: aoc2023.Must(strconv.Atoi(value)),
+				value: aoc2023.ToInt(value),
 			})
 		}
 

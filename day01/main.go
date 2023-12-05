@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/MartyHub/aoc2023"
@@ -81,12 +80,10 @@ func (num *Number) Add(digit Digit) {
 }
 
 func (num *Number) Value() int {
-	return aoc2023.Must(
-		strconv.Atoi(fmt.Sprintf("%d%d",
-			num[0].value,
-			num[1].value,
-		)),
-	)
+	return aoc2023.ToInt(fmt.Sprintf("%d%d",
+		num[0].value,
+		num[1].value,
+	))
 }
 
 func (nums Numbers) sum() int {
