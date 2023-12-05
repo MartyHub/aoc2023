@@ -14,13 +14,13 @@ func main() {
 }
 
 func part1() {
-	aoc2023.Expect("Sample 1", parse("day05/data/sample.txt").MinLoc1(), 35)
-	aoc2023.Expect("Part 1", parse("day05/data/input.txt").MinLoc1(), 278755257)
+	aoc2023.Expect("Sample 1", 35, parse("day05/data/sample.txt").MinLoc1)
+	aoc2023.Expect("Part 1", 278755257, parse("day05/data/input.txt").MinLoc1)
 }
 
 func part2() {
-	aoc2023.Expect("Sample 2", parse("day05/data/sample.txt").MinLoc2(), 46)
-	aoc2023.Expect("Part 2", parse("day05/data/input.txt").MinLoc2(), 26829166)
+	aoc2023.Expect("Sample 2", 46, parse("day05/data/sample.txt").MinLoc2)
+	aoc2023.Expect("Part 2", 26829166, parse("day05/data/input.txt").MinLoc2)
 }
 
 func parse(filePath string) *Almanac {

@@ -15,13 +15,13 @@ func main() {
 }
 
 func part1() {
-	aoc2023.Expect("Sample 1", parse("day03/data/sample.txt").sum1(), 4361)
-	aoc2023.Expect("Part 1", parse("day03/data/input.txt").sum1(), 526404)
+	aoc2023.Expect("Sample 1", 4361, parse("day03/data/sample.txt").sum1)
+	aoc2023.Expect("Part 1", 526404, parse("day03/data/input.txt").sum1)
 }
 
 func part2() {
-	aoc2023.Expect("Sample 2", parse("day03/data/sample.txt").sum2(), 467835)
-	aoc2023.Expect("Part 2", parse("day03/data/input.txt").sum2(), 84399773)
+	aoc2023.Expect("Sample 2", 467835, parse("day03/data/sample.txt").sum2)
+	aoc2023.Expect("Part 2", 84399773, parse("day03/data/input.txt").sum2)
 }
 
 func parse(filePath string) Engine {

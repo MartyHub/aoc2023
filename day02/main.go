@@ -19,13 +19,13 @@ func part1() {
 		blue:  14,
 	}
 
-	aoc2023.Expect("Sample 1", parse("day02/data/sample.txt").sum(bag), 8)
-	aoc2023.Expect("Part 1", parse("day02/data/input.txt").sum(bag), 2377)
+	aoc2023.Expect("Sample 1", 8, func() int { return parse("day02/data/sample.txt").sum(bag) })
+	aoc2023.Expect("Part 1", 2377, func() int { return parse("day02/data/input.txt").sum(bag) })
 }
 
 func part2() {
-	aoc2023.Expect("Sample 2", parse("day02/data/sample.txt").min(), 2286)
-	aoc2023.Expect("Part 2", parse("day02/data/input.txt").min(), 71220)
+	aoc2023.Expect("Sample 2", 2286, parse("day02/data/sample.txt").min)
+	aoc2023.Expect("Part 2", 71220, parse("day02/data/input.txt").min)
 }
 
 func parse(filePath string) Games {

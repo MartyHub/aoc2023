@@ -17,8 +17,8 @@ func part1() {
 		"1", "2", "3", "4", "5", "6", "7", "8", "9",
 	}
 
-	aoc2023.Expect("Sample 1", parse("day01/data/sample1.txt", integers).sum(), 142)
-	aoc2023.Expect("Part 1", parse("day01/data/input.txt", integers).sum(), 55834)
+	aoc2023.Expect("Sample 1", 142, parse("day01/data/sample1.txt", integers).sum)
+	aoc2023.Expect("Part 1", 55834, parse("day01/data/input.txt", integers).sum)
 }
 
 func part2() {
@@ -27,8 +27,8 @@ func part2() {
 		"one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 	}
 
-	aoc2023.Expect("Sample 2", parse("day01/data/sample2.txt", integers).sum(), 281)
-	aoc2023.Expect("Part 2", parse("day01/data/input.txt", integers).sum(), 53221)
+	aoc2023.Expect("Sample 2", 281, parse("day01/data/sample2.txt", integers).sum)
+	aoc2023.Expect("Part 2", 53221, parse("day01/data/input.txt", integers).sum)
 }
 
 func parse(filePath string, integers []string) Numbers {

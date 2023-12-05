@@ -13,13 +13,13 @@ func main() {
 }
 
 func part1() {
-	aoc2023.Expect("Sample 1", parse("day04/data/sample.txt").Score(), 13)
-	aoc2023.Expect("Part 1", parse("day04/data/input.txt").Score(), 20667)
+	aoc2023.Expect("Sample 1", 13, parse("day04/data/sample.txt").Score)
+	aoc2023.Expect("Part 1", 20667, parse("day04/data/input.txt").Score)
 }
 
 func part2() {
-	aoc2023.Expect("Sample 2", parse("day04/data/sample.txt").Scratchcards(), 30)
-	aoc2023.Expect("Part 2", parse("day04/data/input.txt").Scratchcards(), 5833065)
+	aoc2023.Expect("Sample 2", 30, parse("day04/data/sample.txt").Scratchcards)
+	aoc2023.Expect("Part 2", 5833065, parse("day04/data/input.txt").Scratchcards)
 }
 
 func parse(filePath string) Cards {
