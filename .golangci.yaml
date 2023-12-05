@@ -6,6 +6,7 @@ linters:
     - depguard
     - exhaustruct
     - forbidigo
+    - funlen
     - gomnd
     - ireturn
     - paralleltest
