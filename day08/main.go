@@ -25,7 +25,6 @@ func part2() {
 
 func parse(filePath string) Network {
 	res := Network{Nodes: make(map[Node]Nodes)}
-
 	re := regexp.MustCompile(`(\w{3}) = \((\w{3}), (\w{3})\)`)
 
 	for _, line := range aoc2023.MustReadLines(filePath) {
@@ -35,14 +34,13 @@ func parse(filePath string) Network {
 
 		if res.Instructions == "" {
 			res.Instructions = line
-		}
 
-		matches := re.FindAllStringSubmatch(line, -1)
-		if matches == nil {
 			continue
 		}
 
-		res.Nodes[Node(matches[0][1])] = []Node{Node(matches[0][2]), Node(matches[0][3])}
+		matches := re.FindStringSubmatch(line)
+
+		res.Nodes[Node(matches[1])] = []Node{Node(matches[2]), Node(matches[3])}
 	}
 
 	return res
@@ -133,25 +131,9 @@ func (nw Network) Compute2() int {
 	}
 
 	for len(cycles) > 1 {
-		cycles[1] = LCM(cycles[0], cycles[1])
+		cycles[1] = aoc2023.LCM(cycles[0], cycles[1])
 		cycles = cycles[1:]
 	}
 
 	return cycles[0]
-}
-
-func GCD(a, b int) int {
-	for a != b {
-		if a > b {
-			a -= b
-		} else {
-			b -= a
-		}
-	}
-
-	return a
-}
-
-func LCM(a, b int) int {
-	return a * b / GCD(a, b)
 }
