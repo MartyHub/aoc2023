@@ -10,7 +10,7 @@ func ToInt(s string) int {
 }
 
 func ToInts(line string) []int {
-	strings := regexp.MustCompile(`(\d+)`).FindAllString(line, -1)
+	strings := regexp.MustCompile(`(-?\d+)`).FindAllString(line, -1)
 
 	if strings == nil {
 		return nil
