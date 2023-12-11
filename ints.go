@@ -24,3 +24,14 @@ func ToInts(line string) []int {
 
 	return res
 }
+
+func Delta(i int) int {
+	switch {
+	case i > 0:
+		return 1
+	case i < 0:
+		return -1
+	default:
+		return 0
+	}
+}
