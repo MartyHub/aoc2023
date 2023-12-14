@@ -15,10 +15,14 @@ func MustReadLines(filePath string) []string {
 
 func MustReadRunes(filePath string) [][]rune {
 	lines := MustReadLines(filePath)
-	res := make([][]rune, len(lines))
+	res := make([][]rune, 0, len(lines))
 
-	for i, line := range lines {
-		res[i] = []rune(line)
+	for _, line := range lines {
+		if line == "" {
+			continue
+		}
+
+		res = append(res, []rune(line))
 	}
 
 	return res
