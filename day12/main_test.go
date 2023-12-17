@@ -36,7 +36,7 @@ func Test_Rec(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.row.Springs, func(t *testing.T) {
 			if got := tt.row.Compute(make(map[string]int)); got != tt.want {
-				t.Errorf("Compute() = %v, want %v for %v", got, tt.want, tt.row)
+				t.Errorf("Compute1() = %v, want %v for %v", got, tt.want, tt.row)
 			}
 		})
 	}

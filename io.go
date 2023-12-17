@@ -27,3 +27,24 @@ func MustReadRunes(filePath string) [][]rune {
 
 	return res
 }
+
+func MustReadInts(filePath string) [][]int {
+	lines := MustReadLines(filePath)
+	res := make([][]int, 0, len(lines))
+
+	for _, line := range lines {
+		if line == "" {
+			continue
+		}
+
+		ints := make([]int, len(line))
+
+		for i, r := range line {
+			ints[i] = int(r - '0')
+		}
+
+		res = append(res, ints)
+	}
+
+	return res
+}
