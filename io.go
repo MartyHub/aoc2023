@@ -1,6 +1,7 @@
 package aoc2023
 
 import (
+	"fmt"
 	"os"
 	"strings"
 )
@@ -47,4 +48,10 @@ func MustReadInts(filePath string) [][]int {
 	}
 
 	return res
+}
+
+func MustSscanf(s, format string, a ...any) {
+	if _, err := fmt.Sscanf(s, format, a...); err != nil {
+		panic(err)
+	}
 }
